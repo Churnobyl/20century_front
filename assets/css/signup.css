@@ -1,0 +1,51 @@
+article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.container {
+    margin-top: -100px;
+}
+
+.btm_ads {
+    grid-column: 1/-1;
+    text-align: center;
+
+}
+
+button {
+    background-color: #FFDAB9;
+    color: #8B4513;
+    border-style: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #FFEFD5;
+    color: #AE5E1A;
+}
+
+.signup {
+    text-align: center;
+}
+
+.a_btn {
+    color: grey;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.a_btn:hover {
+    color: black;
+    text-decoration-line: none;
+}
+
+.logo_img {
+    height: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
