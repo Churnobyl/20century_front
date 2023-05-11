@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login • 20 Century</title>
+    <meta name="description" content="A minimalist layout for Login pages. Built with Pico CSS." />
+    <link rel="shortcut icon" href="https://picocss.com/favicon.ico" />
+    <link rel="canonical" href="https://picocss.com/examples/sign-in/" />
+    <!-- Pico.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+</head>
+
+<body>
+    <!-- Nav -->
+    <nav class="container-fluid">
+        <ul>
+        </ul>
+        <ul>
+            <li>
+            </li>
+            <li>
+            </li>
+        </ul>
+    </nav>
+    <!-- ./ Nav -->
+
+    <!-- Main -->
+    <main class="container">
+        <a href="index.html">
+            <img class="logo_img" src="assets/images/logo.png" alt="logo img">
+        </a>
+        <article>
+            <div>
+                <hgroup>
+                    <h1>Log in</h1>
+                </hgroup>
+                <form>
+                    <input type="email" name="email" placeholder="email" aria-label="email" autocomplete="email"
+                        required />
+                    <input type="password" name="password" placeholder="password" aria-label="password"
+                        autocomplete="current-password" required />
+                    <button onclick="handleLogin()">로 그 인</button>
+                    <div class="signup">
+                        <a class="a_btn" href="signup.html"> 회원가입 </a>
+                        <a class="a_btn" href=""> 비밀번호 재설정 </a>
+                    </div>
+                </form>
+            </div>
+            <div style="margin: 50px 10px 0px 10px;">
+                <p>"이 마을은 왜 이렇게 그립고 정겨운 냄새가 나는 거야!"</p>
+                20세기 박물관을 다녀온 떡잎마을의 어른들이 이상해졌다.
+                20세기 사람들에겐 꿈과 희망이 있었어. 그들에게 21세기는 희망 그 자체였지. 하지만 모든 게 달라졌어.
+                다들 더러운 욕망과 돈에 사로잡혀 있을 뿐이야. 우리가 꿈꾸던 21세기는 이런 게 아니었는데⋯.
+            </div>
+            <div class="btm_ads">
+                <img src="assets/images/JJangu.jpg" alt="coffee_ad1" style="width:900px; height: 350px;">
+            </div>
+        </article>
+    </main>
+    <!-- ./ Main -->
+
+    <!-- Minimal theme switcher -->
+    <script src="js/minimal-theme-switcher.js"></script>
+</body>
+
+</html>

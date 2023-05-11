@@ -1,0 +1,103 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 1500px 1fr;
+
+}
+
+html {
+    max-width: 2000px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+header {
+    grid-column: 2;
+    height: 100px;
+}
+
+.login_bar {
+    grid-column: 2;
+    display: flex;
+
+    justify-content: right;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+    margin-right: 100px;
+}
+
+.login_bar>a {
+    text-decoration-line: none;
+    color: gray;
+}
+
+#img_area {
+    background-image: url('/assets/images/coffee1.png');
+    background-position: center;
+    background-size: cover;
+
+    grid-column: 2;
+    height: 300px;
+}
+
+main {
+    display: grid;
+    grid-column: 2;
+}
+
+.ad_left {
+    display: grid;
+    grid-column: 1;
+    width: 250px;
+    margin-top: 50px;
+}
+
+.ad_right {
+    display: grid;
+    grid-column: 3;
+    width: 100px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.category_list {
+    height: 300px;
+    margin-top: 50px;
+}
+
+.col {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.col>h5 {
+    margin-top: 10px;
+}
+
+.card-img-top {
+    height: 100%;
+    object-fit: cover;
+}
+
+.product_list {
+    height: 300px;
+}
+
+.btn-success {
+    margin: 0px auto;
+    margin-bottom: 20px;
+    width: 100px;
+}
+
+.text-bg-danger {
+    width: 50px;
+    margin: 0px auto;
+    margin-right: 25px;
+}
+
+.brand_list {
+    margin-left: 10px;
+    margin-right: 10px;
+}
