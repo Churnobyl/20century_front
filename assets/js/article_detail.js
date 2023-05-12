@@ -16,7 +16,7 @@ async function DetailArticle(id){
     })
 
     response_json = await response.json()    
-    
+    console.log(response_json)
     if (user_parse != response_json.user) {
         const btn_edit = document.getElementById('detail_btn_edit')
         const btn_del = document.getElementById('detail_btn_del')
@@ -102,7 +102,7 @@ async function MyProductShow() {
     document.getElementById('product_content').value = response_json.content
 }
 
-// 상품 정보 수정
+// 상품 정보 수정 /////////////////////////////////////확인
 async function DetailPatchArticle(){
 
     const title = document.getElementById('product_title');
@@ -116,9 +116,9 @@ async function DetailPatchArticle(){
         },
         method: 'PATCH',
         body: JSON.stringify({
-            "title": title.value,
-            "category": category.value,
-            "content": content.value,
+            "product_title": title.value,
+            "product_category": category.value,
+            "product_content": content.value,
         })
     })
 
@@ -151,4 +151,36 @@ async function MyProductDelete() {
     }
 
     window.location.replace(`${FRONTEND_API}/index.html`)
+}
+
+// 상품 구매 ////////////////////////////작업중////////////////////////////////
+async function DetailPatchArticle(){
+
+    const id = document.getElementById('product_title');
+    const user = document.getElementById('product_category');
+    const point = document.getElementById('product_content');
+    
+    const response = await fetch(`${BACKEND_API}/api/article/${article_id}/`, {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("access"),
+            'content-type': 'application/json',
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
+            "id": id.value,
+            "max_user": user.value,
+            "max_point": point.value,
+        })
+    })
+
+    if (response.status == 200) {
+        alert("수정이 완료되었습니다.")
+        window.location.reload()
+    } else if (title.value == '' || content.value == '') {
+        alert("빈칸을 입력해 주세요.")
+    } else if (category.value == '-- 카테고리를 선택해 주세요 --') {
+        alert("카테고리를 선택해 주세요.")
+    } 
+
+    window.location.reload()
 }

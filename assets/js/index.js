@@ -58,49 +58,51 @@ async function handleShow() {
     })
 
     const response_json = await response.json()
-    // console.log(response_json)
+    console.log(response_json)
     const response_json3 = JSON.parse(JSON.stringify(response_json.article2));
     const response_json2 = JSON.parse(JSON.stringify(response_json.article2));
     sort_function(response_json2, 'bookmarked', 'desc')
 
-    console.log(response_json2)    
+    console.log(response_json2)
 
+    let a = 0
     response_json2.forEach((e) => {
+        console.log(e)
         const backendUrl = 'http://127.0.0.1:8000'; // Replace with your backend URL
-        if (e.progress === true) {
-            category_content.innerHTML += `<div class='col'>
-                <div class='card h-100'>
-                    <img src='${backendUrl}${e.image}' class='card-img-top'>
-                    <span class='badge rounded-pill text-bg-success'>진행중</span>
-                    <div class='card-body'>
-                        <h5 class='card-title'>제목: ${e.title}</h5>
-                        <p class='card-text'> 상품: ${e.product} </p>
-                        <h5 class='card-title' id='bid${e.i}'>현재가: ${e.bid}</h5>
-                    </div>
-                    <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${e.article_id})'>보러가기</button>
-                    <div class='card-footer'>
-                        <small class='text-body-secondary'><span id='finish-time${e.i}'>${e.elapsedTime} (${e.finished_at})</span></small>
-                    </div>
+        category_content.innerHTML += `<div class='col'>
+            <div class='card h-100'>
+                <img src='${backendUrl}${e.image}' class='card-img-top'>
+                <div class="progress-edge" id='progress${a}'>
                 </div>
-            </div>`
-        } else {                    
-            category_content.innerHTML += `<div class='col'>
-                <div class='card h-100'>
-                    <img src='${backendUrl}${e.image}' class='card-img-top'>
-                    <span class='badge rounded-pill text-bg-danger'>종료</span>
-                    <div class='card-body'>
-                        <h5 class='card-title'>제목: ${e.title}</h5>
-                        <p class='card-text'> 상품: ${e.product} </p>
-                        <h5 class='card-title' id='bid${e.i}'>현재가: ${e.bid}</h5>
-                    </div>
-                    <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${e.article_id})'>보러가기</button>
-                    <div class='card-footer'>
-                        <small class='text-body-secondary'><span id='finish-time${e.i}'>${e.elapsedTime} (${e.finished_at})</span></small>
-                    </div>
+                <div class='card-body'>
+                    <h5 class='card-title'>제목: ${e.title}</h5>
+                    <p class='card-text'> 상품: ${e.product} </p>
+                    <h5 class='card-title' id='bid${a}'>현재가: ${e.bid}</h5>
                 </div>
-            </div>`
+                <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${e.id})'>보러가기</button>
+                <div class='card-footer'>
+                    <small class='text-body-secondary'><span id='finish-time${a}'>${elapsedTime(e.finished_at)}</span></small>
+                </div>
+            </div>
+        </div>`
+
+
+        if (e.progress === true)
+        {
+            document.querySelector(`#progress${a}`).innerHTML = `<span class='badge rounded-pill text-bg-success'>진행중</span>`;
+        } else {
+            document.querySelector(`#progress${a}`).innerHTML = `<span class='badge rounded-pill text-bg-danger'>종료</span>`;
+        };
+
+        if (e.bid === undefined)
+        {
+            document.querySelector(`#bid${a}`).textContent = '입찰없음';
+        }
+
+        a++;
         }                
-    })        
+    ) 
+    }       
     
     // for (let i = 0; i < RECOMMEND_PRODUCT; i++) {
     //     let image = response_json2[i]['image'];
@@ -140,7 +142,7 @@ async function handleShow() {
         // {
         //     document.querySelector(`#bid${i}`).textContent = '입찰없음';
         // }
-}
+
     
     // 카테고리 작은 카드 부분
     // for(let i=0; i < RESENT_PRODUCT; i++){

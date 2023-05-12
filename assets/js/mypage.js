@@ -88,22 +88,26 @@ async function MypageShow() {
         console.log(title)
     
         bookmark_board.innerHTML +=
-        `<div class='col'>
-            <div class='card h-100'>
-                <img src=${image} class='card-img-top'>
-                <div class="progress-edge" id='progress${i}'>
-                </div>
-                <div class='card-body'>
-                    <h5 class='card-title'>제목: ${title}</h5>
-                    <p class='card-text'> 상품: ${product} </p>
-                    <h5 class='card-title' id='bid${i}'>현재가: ${max_point}</h5>
-                </div>
-                <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${id})'>보러가기</button>
-                <div class='card-footer'>
-                    <small class='text-body-secondary'><span id="finish-time${i}">${elapsedTime(finished_at)}</span></small>
+        `
+        <div class='bookmark_container'>
+            <div class='col'>
+                <div class='card h-100'>
+                    <img src=${image} class='card-img-top'>
+                    <div class="progress-edge" id='progress${i}'>
+                    </div>
+                    <div class='card-body'>
+                        <h5 class='card-title'>제목: ${title}</h5>
+                        <p class='card-text'> 상품: ${product} </p>
+                        <h5 class='card-title' id='bid${i}'>현재가: ${max_point}</h5>
+                    </div>
+                    <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${id})'>보러가기</button>
+                    <div class='card-footer'>
+                        <small class='text-body-secondary'><span id="finish-time${i}">${elapsedTime(finished_at)}</span></small>
+                    </div>
                 </div>
             </div>
-        </div>`;
+        </div>
+        `;
     
         if (progress === true) {
             document.querySelector(`#progress${i}`).innerHTML = `<span class='badge rounded-pill text-bg-success'>진행중</span>`;
@@ -123,17 +127,21 @@ async function MypageShow() {
         const image = `${BACKEND_API}${image_url}`;
 
         bid_board.innerHTML +=
-        `<div class="col">
-            <div class="card h-100">
-                <a href="detail.html?id=${id}">
-                <img src=${image} class="card-img-top" alt="...">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">${product}</h5>
-                    <p class='card-text'> 현재가: ${max_point} </p>
+        `
+        <div class='card_size_container'>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="detail.html?id=${id}">
+                    <img src=${image} class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">${product}</h5>
+                        <p class='card-text'> 현재가: ${max_point} </p>
+                    </div>
                 </div>
             </div>
-        </div>`;
+        </div>
+        `;
     });
 
     // 마이페이지 찜 목록

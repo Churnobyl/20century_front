@@ -33,7 +33,7 @@ header {
 
 main {
     display: grid;
-    grid-column: 2;
+    grid-column: 2/3;
 }
 
 .user_profile {
@@ -84,20 +84,20 @@ main {
     align-items: center;
 }
 
-
-
-.category_list {
-    height: 200px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 100px;
+.my_page_list{
+    grid-column: 1/4;
 }
 
-.product_list {
-    margin-top: 150px;
+
+.card_size_container{
+    width: 270px;
     height: 300px;
 }
 
+.bookmark_container{
+    margin-top: 50px;
+    width: 370px;
+}
 
 .col {
     justify-content: center;
@@ -183,7 +183,7 @@ main {
 .list_font {
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-top: 120px;
 }
 
 

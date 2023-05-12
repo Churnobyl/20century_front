@@ -5,6 +5,7 @@ body {
 }
 
 html {
+    /* 270, 300 */
     max-width: 2000px;
     align-items: center;
     justify-content: center;
