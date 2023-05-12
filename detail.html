@@ -22,25 +22,27 @@
     <main>
         <div class="main_div">
             <div class="main_left">
-                <img src="assets/images/logo.png" class="product_img">
+                <img class="product_img" id="detail_product_img">
             </div>
             <div class="main_right">
-                <div class="main_font" style="margin: 10px 0px 0px 50px">상품명</div>
+                <div class="main_font" style="margin: 10px 0px 0px 50px" id="detail_product_name"></div>
                 <hr>
                 <div class="cost">
                     <div class="info_font">현재 거래가</div>
-                    <div class="money">100원</div>
+                    <div class="money" id="detail_product_price"></div>
                 </div>
                 <div>
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-success" type="button">구매 | 300원</button>
-                        <button class="btn btn-danger" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        <button class="btn btn-success" type="button" onclick="PurchaseProduct()"><div id ="detail_btn_price">구매 | 300원</div></button>
+                        <button class="btn btn-danger" type="button" onclick="BookmarkArticle()"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
                                 <path
                                     d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
                                 <path
                                     d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                            </svg> 관심상품</button>
+                            </svg>관심상품</button>
+                        <button id ="detail_btn_edit" class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="MyProductShow()">상품 정보 수정</button>
+                        <button id ="detail_btn_del" class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="MyProductDelete()">상품 삭제</button>
                     </div>
                     <!-- 입찰 종료시 
                     <button type="button" class="btn btn-secondary">종료됨</button>
@@ -51,19 +53,19 @@
                 <div class="product_info">
                     <div>
                         <div class="info_font">판매자 이름</div>
-                        <div>OOO</div>
+                        <div id="detail_seller_name">OOO</div>
                     </div>
                     <div>
                         <div class="info_font">상품 번호</div>
-                        <div>101</div>
+                        <div id="detail_product_num">101</div>
                     </div>
                     <div>
                         <div class="info_font">입찰 시작일</div>
-                        <div>23/05/10</div>
+                        <div id="detail_created_at">23/05/10</div>
                     </div>
                     <div>
                         <div class="info_font">입찰 종료일</div>
-                        <div>23/05/10</div>
+                        <div id="detail_finished_at">23/05/10</div>
                     </div>
                 </div>
             </div>
@@ -71,7 +73,8 @@
                 <div id="timer">
                     00 : 00 : 00 초 남음
                 </div>
-                <div class="desc_font">
+                <hr>
+                <div class="desc_font" id="detail_product_desc">
                     여기가 desc
                 </div>
             </div>
@@ -80,15 +83,53 @@
                     <img class="banner_img" src="assets/images/coffee1.png" width="800px" height="350px">
                     <span class="badge rounded-pill text-bg-light">AD</span>
                 </div>
+            </div>            
+        </div>
+        <div class="comment_area"></div>
+    </main>
+    <div class="comment_area"></div>
+
+
+    <!-- 개인정보 수정 Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">내 상품 정보 수정</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="main_font">제목</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="product_title">
+                    </div>
+                    <p class="main_font">카테고리</p>
+                    <select id="product_category" class="form-select" aria-label="Default select example">
+                        <option selected>-- 카테고리를 선택해 주세요 --</option>
+                        <option value="A">일렉츄로닉</option>
+                        <option value="B">패숑</option>
+                        <option value="C">담금주</option>
+                        <option value="D">잡화</option>
+                    </select></br>
+                    <p class="main_font">상품 소개</p>
+                    <div class="input-group mb-3">
+                        <textarea type="text" class="form-control" id="product_content" style="height: 150px"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-danger" onclick="DetailPatchArticle()">수정</button>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 
 
     <!--script-->
     <script src="assets/js/loading.js"></script>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/api.js"></script>
+    <script src="assets/js/article_detail.js"></script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ html {
 
 header {
     grid-column: 2;
-    height: 115px;
+    height: 130px;
 }
 
 .login_bar {
@@ -51,6 +51,7 @@ main {
     grid-column: 1;
     width: 250px;
     margin-top: 50px;
+    margin-right: 50px;
 }
 
 .ad_right {
@@ -58,12 +59,21 @@ main {
     grid-column: 3;
     width: 100px;
     margin: auto;
+    margin-left: 50px;
     margin-top: 50px;
 }
 
 .category_list {
     height: 300px;
     margin-top: 50px;
+}
+
+.category_col {
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 300px;
+    width: 270px;
 }
 
 .col {
@@ -76,8 +86,16 @@ main {
     margin-top: 10px;
 }
 
-.card-img-top {
+.category_img {
     height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.card-img-top {
+    height: 300px;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -90,7 +108,7 @@ main {
 .text-bg-danger {
     width: 50px;
     margin: 0px auto;
-    margin-right: 25px;
+    /* margin-right: 25px; */
 }
 
 .brand_list {
@@ -98,8 +116,13 @@ main {
 }
 
 .badge {
+    font-size: 1rem;
+}
+
+.progress-edge {
     position: absolute;
     top: 15px;
-    right: -5px;
-    z-index: 1;
+    right: 15px;
+    z-index: 9999;
+    text-align: right;
 }

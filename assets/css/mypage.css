@@ -53,11 +53,11 @@ main {
 
 #profile_img_area {
     object-fit: cover;
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     background-position: center;
     background-size: cover;
-
+    object-position: center;
     display: flex;
     margin: auto;
     border-radius: 20px;
@@ -84,6 +84,8 @@ main {
     align-items: center;
 }
 
+
+
 .category_list {
     height: 200px;
     margin-left: 20px;
@@ -92,7 +94,32 @@ main {
 }
 
 .product_list {
+    margin-top: 150px;
     height: 300px;
+}
+
+
+.col {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.col>h5 {
+    margin-top: 10px;
+}
+
+.category_img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.card-img-top {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .btn-success {
@@ -158,6 +185,8 @@ main {
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+
 
 .ad_btm {
     display: grid;

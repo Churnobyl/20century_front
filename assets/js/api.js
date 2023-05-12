@@ -1,5 +1,5 @@
 const BACKEND_API = 'http://127.0.0.1:8000'
-const FRONTEND_API = 'http://127.0.0.1:5500/'
+const FRONTEND_API = 'http://127.0.0.1:5500'
 const email = document.querySelector('#email')
 const password = document.querySelector('#password')
 const password2 = document.querySelector('#password2')
@@ -12,6 +12,7 @@ const product_content = document.getElementById("product_content")
 const profile_image = document.getElementById("profile_image")
 
 
+
 async function handleSignup() {
 
     const formdata = new FormData()
@@ -20,6 +21,9 @@ async function handleSignup() {
     formdata.append('password1', password.value);
     formdata.append('password2', password2.value);
     formdata.append('profile_image', profile_image.files[0]);
+
+    console.log(email.value)
+    console.log(profile_image.files[0])
 
     const response = await fetch(`${BACKEND_API}/api/user/dj-rest-auth/registration/`, {
         method: 'POST',
@@ -32,7 +36,7 @@ async function handleSignup() {
 
     if (response.status == 201) {
         alert("가입되었습니다.")
-        window.location.replace(`${FRONTEND_API}login.html`)
+        window.location.replace(`${FRONTEND_API}/login.html`)
     } else if (email.value == '' || password.value == '' || password2.value == '') {
         alert("빈칸을 입력해 주세요.")
     } else if (password.value != password2.value) {
@@ -74,7 +78,9 @@ async function handleLogin() {
         window.location.replace(FRONTEND_API)
     } else if (email.value == '' || password.value == '') {
         alert("빈칸을 입력해 주세요.")
-    } else {
+    } else if (response_json['detail'] == "No active account found with the given credentials") {
+        alert("탈퇴한 사용자입니다.")
+    }else {
         alert('이메일과 비밀번호가 일치하지 않습니다.')
     }
 }
@@ -84,36 +90,7 @@ function handleLogout() {
     localStorage.removeItem('refresh')
     localStorage.removeItem('payload')
 
-    window.location.replace(`${FRONTEND_API}index.html`)
-}
-
-
-//상품 등록
-async function CreateProduct() {
-
-    const formdata = new FormData()
-    formdata.append('title', product_title.value);
-    formdata.append('name', product_name.value);
-    formdata.append('category', product_category.value);
-    formdata.append('image', product_image.files[0]);
-    formdata.append('content', product_content.value);
-    formdata.append("finished_at", "2023-05-12 18:00:00");
-
-    const response = await fetch(`${BACKEND_API}/api/article/`, {
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem("access"),
-        },
-        method: 'POST',
-        body: formdata
-    })
-
-    if (response.status == 200) {
-        alert("상품이 등록되었습니다.")
-        window.location.replace(`${FRONTEND_API}/`)
-    } else if (product_title.value == '' || product_name.value == '' || product_category.value == '' || product_content.value == '') {
-        alert("빈칸을 입력해 주세요.")
-    }
-
+    window.location.replace(`${FRONTEND_API}/index.html`)
 }
 
 // 상품 정보 수정
@@ -124,7 +101,7 @@ async function EditProduct() {
             "Authorization": "Bearer " + localStorage.getItem("access"),
             'content-type': 'application/json',
         },
-        method: 'GET',
+        method: 'PATCH',
         body: JSON.stringify({
             "title": product_title.value,
             "name": product_name.value,
@@ -137,7 +114,7 @@ async function EditProduct() {
 
     if (response.status == 200) {
         alert("상품이 등록되었습니다.")
-        window.location.replace(`${FRONTEND_API}`)
+        window.location.replace(`${FRONTEND_API}/`)
     } else if (product_title.value == '' || product_name.value == '' || product_category.value == '' || product_content.value == '') {
         alert("빈칸을 입력해 주세요.")
     }
@@ -147,7 +124,7 @@ function checkLogin() {
     const payload = localStorage.getItem('payload');
 
     if (payload) {
-        window.location.replace(`${FRONTEND_API}`)
+        window.location.replace(`${FRONTEND_API}/`)
     }
 }
 
@@ -156,6 +133,6 @@ function checkLogout() {
     const payload = localStorage.getItem('payload');
 
     if (payload == null) {
-        window.location.replace(`${FRONTEND_API}`)
+        window.location.replace(`${FRONTEND_API}/`)
     }
 }
