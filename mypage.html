@@ -19,58 +19,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="login_bar">
-            <a href="login.html">로그인</a>
-            <a href="signup.html">회원가입</a>
-        </div>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a href="index.html">
-                    <img style="height: 50px;" src="assets/images/logo.png" alt="logo img">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"
-                        style="position: absolute; bottom: 0; font-size: small; font-weight: bold;">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">전체</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">일렉츄로닉</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">패숑</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">담금주</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">잡화</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html" style="font-weight: bold;">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="mypage.html">My Page</a>
-                        </li>
-                    </ul>
+    <header></header>
 
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-
-                </div>
-            </div>
-        </nav>
-    </header>
     <main>
         <div>
             <div class="category_list">
@@ -188,28 +138,36 @@
         </div>
         <div class="user_profile">
             <div class="profile_img">
-                <img src="">
+                <img id="profile_img_area">
             </div>
             <div class="profile_desc">
-                <div>
+                <div id="username" class="user_font">
                     이름
                 </div>
-                <div>
-                    설명?
+                <div id="user_created_at" class="user_font">
+                    가입 날짜
                 </div>
             </div>
-            <div class="profile_btn">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">내 정보 수정</button>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">탈 퇴</button>
+            <div class="profile_btn1">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="MyinfoShow()">내 정보
+                    수정</button>
+            </div>
+            <div class="profile_btn2">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">포인트
+                    충전</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3"
+                    style="width:70px;">탈퇴</button>
             </div>
             <img class="ad_profile" src="assets/images/anycall.png">
+            <!-- <span class="badge rounded-pill text-bg-light">AD</span> -->
         </div>
     </main>
     <img class="ad_btm" src="assets/images/coffee1.png">
+    <!-- <span class="badge rounded-pill text-bg-light">AD</span> -->
 
 
     <!-- 개인정보 수정 Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -217,18 +175,51 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <p class="main_font">이메일</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="email" disabled>
+                    </div>
+                    <p class="main_font">이름</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="edit_user_name">
+                    </div>
+                    <p class="main_font">이미지</p>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="edit_user_image">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-success" onclick="handleMyEdit()">수정</button>
+                    <button type="button" class="btn btn-danger" onclick="handleMyEdit()">수정</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 포인트 충전 Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">포인트 충전</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="main_font">충전할 금액</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="my_point">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-danger" onclick="PointCharge()">충전</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 탈퇴 Modal -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -240,14 +231,17 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-danger" onclick="handleMyDelete()">확인</button>
+                    <button type="button" class="btn btn-danger" onclick="DeleteUser()">확인</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!--script-->
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/loading.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/mypage.js"></script>
+
 </body>
 
 </html>
