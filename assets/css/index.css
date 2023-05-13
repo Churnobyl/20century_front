@@ -111,8 +111,13 @@ main {
     /* margin-right: 25px; */
 }
 
+.page_section {
+    margin: 0px auto;
+    margin-top: 20px;
+}
+
 .brand_list {
-    margin: 100px 10px 0px 10px;
+    margin: 100px 10px 100px 10px;
 }
 
 .badge {

@@ -138,13 +138,19 @@ main {
 
 .comment_area {
     grid-column: 2;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    background-color: #CD1039;
     width: 600px;
-    height: 50px;
+    margin: 0px auto;
+    margin-top: 100px;
+}
+
+.comment_form {
     display: flex;
-    justify-content: right;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.comment_input {
+    display: flex;
     align-items: center;
 }

@@ -9,15 +9,17 @@ const article_id = new URLSearchParams(window.location.search).get('id');
 
 async function DetailArticle(id){
     const user = localStorage.getItem("payload")
-    const user_parse = JSON.parse(user).username
+    const user_id = JSON.parse(user).user_id
     
     const response = await fetch(`${BACKEND_API}/api/article/${id}`, {
-        method: 'GET',        
+        method: 'GET',
     })
 
-    response_json = await response.json()    
+    const response_json = await response.json()
+
     console.log(response_json)
-    if (user_parse != response_json.user) {
+
+    if (user_id != response_json.user_id) {
         const btn_edit = document.getElementById('detail_btn_edit')
         const btn_del = document.getElementById('detail_btn_del')
         btn_edit.remove();
@@ -32,17 +34,18 @@ async function DetailArticle(id){
     const detail_created_at = document.querySelector('#detail_created_at');
     const detail_product_desc = document.querySelector('#detail_product_desc');
     const detail_product_img = document.querySelector('#detail_product_img');
-    const detail_product_img_url = `${BACKEND_API}/${response_json.image}`
+    const detail_product_img_url = `${BACKEND_API}/${response_json.article.image}`
+    //const max_price = response_json.max_point + 10
 
     detail_product_img.setAttribute('src', detail_product_img_url)
-    detail_product_name.innerText = response_json.product
-    detail_product_price.innerText = response_json.max_user
-    detail_btn_price.innerText = `구매 | ${response_json.max_user}원`
-    detail_seller_name.innerText = response_json.user
-    detail_product_num.innerText = response_json.id
-    detail_created_at.innerText = response_json.created_at.substr(0, 10)
-    detail_finished_at.innerText = response_json.finished_at.substr(0, 10)
-    detail_product_desc.innerText = response_json.content
+    detail_product_name.innerText = response_json.article.product
+    detail_product_price.innerText = response_json.article.max_point
+    //detail_btn_price.innerText = `구매 | ${max_price}원`
+    detail_seller_name.innerText = response_json.article.user
+    detail_product_num.innerText = response_json.article.id
+    detail_created_at.innerText = response_json.article.created_at.substr(0, 10)
+    detail_finished_at.innerText = response_json.article.finished_at.substr(0, 10)
+    detail_product_desc.innerText = response_json.article.content
 
     // 시간 타이머
     const clock = document.querySelector("#timer");
@@ -66,6 +69,14 @@ async function DetailArticle(id){
     getClock(); //맨처음에 한번 실행
     setInterval(getClock, 1000); //1초 주기로 새로실행
     
+    // 댓글 불러오기
+    response_json.comment.forEach((e) => {
+        console.log(e)
+        comment_list.innerHTML += `<li class="list-group-item">${e.content}
+            <button class="btn btn-outline-success" type="button" style="width: 60px" onclick="EditComment(${e.id})">수정</button>
+            <button class="btn btn-outline-success" type="button" style="width: 60px" onclick="DeleteComment(${e.id})">삭제</button>
+        </li>`
+    })
 }
 
 // 관심 상품 등록
@@ -91,21 +102,21 @@ async function BookmarkArticle(){
 // 내 상품 정보 수정시 보이는 정보
 async function MyProductShow() {
 
-    const response = await fetch(`${BACKEND_API}/api/article/${article_id}`, {
+    const response = await fetch(`${BACKEND_API}/api/article/${article_id}/`, {
         method: 'GET',        
     })
 
     response_json = await response.json()
 
-    document.getElementById('product_title').value = response_json.title
+    document.getElementById('product_name').value = response_json.product
     document.getElementById('product_category').value = response_json.category
     document.getElementById('product_content').value = response_json.content
 }
 
-// 상품 정보 수정 /////////////////////////////////////확인
+// 상품 정보 수정
 async function DetailPatchArticle(){
 
-    const title = document.getElementById('product_title');
+    const product = document.getElementById('product_name');
     const category = document.getElementById('product_category');
     const content = document.getElementById('product_content');
     
@@ -116,16 +127,16 @@ async function DetailPatchArticle(){
         },
         method: 'PATCH',
         body: JSON.stringify({
-            "product_title": title.value,
-            "product_category": category.value,
-            "product_content": content.value,
+            "product": product.value,
+            "category": category.value,
+            "content": content.value,
         })
     })
 
     if (response.status == 200) {
         alert("수정이 완료되었습니다.")
         window.location.reload()
-    } else if (title.value == '' || content.value == '') {
+    } else if (product.value == '' || content.value == '') {
         alert("빈칸을 입력해 주세요.")
     } else if (category.value == '-- 카테고리를 선택해 주세요 --') {
         alert("카테고리를 선택해 주세요.")
@@ -153,34 +164,96 @@ async function MyProductDelete() {
     window.location.replace(`${FRONTEND_API}/index.html`)
 }
 
-// 상품 구매 ////////////////////////////작업중////////////////////////////////
-async function DetailPatchArticle(){
+// 상품 입찰
+async function PurchaseProduct(){
 
-    const id = document.getElementById('product_title');
-    const user = document.getElementById('product_category');
-    const point = document.getElementById('product_content');
+    const point = document.getElementById('my_point').value
     
-    const response = await fetch(`${BACKEND_API}/api/article/${article_id}/`, {
+    const response = await fetch(`${BACKEND_API}/api/article/${article_id}/bid/`, {
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("access"),
             'content-type': 'application/json',
         },
         method: 'PATCH',
         body: JSON.stringify({
-            "id": id.value,
-            "max_user": user.value,
-            "max_point": point.value,
+            "max_point": point,
         })
     })
 
     if (response.status == 200) {
-        alert("수정이 완료되었습니다.")
-        window.location.reload()
-    } else if (title.value == '' || content.value == '') {
-        alert("빈칸을 입력해 주세요.")
-    } else if (category.value == '-- 카테고리를 선택해 주세요 --') {
-        alert("카테고리를 선택해 주세요.")
+        alert("입찰이 완료되었습니다.")
+    } else if (response.status == 401) {
+        alert("게시자는 경매에 참여할 수 없습니다.")
+    } else if (response.status == 406) {
+        alert("최고입찰자가 재입찰 할 수 없습니다.")
+    } else if (response.status == 408) {
+        alert("최고가보다 낮은 금액으로 입찰할 수 없습니다.")
+    } else if (response.status == 402) {
+        alert("포인트가 부족합니다.")
+    }
+
+    window.location.reload()
+}
+
+// 댓글 작성
+async function CreateComment() {
+
+    const comment = document.getElementById('comment').value
+
+    const response = await fetch(`${BACKEND_API}/api/article/${article_id}/comment/`, {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("access"),
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            'content': comment,
+        })
+    })
+    
+    if (response.status == 201) {
+        alert("댓글 작성 완료")         
+    } else if (response.status == 400) {
+        alert("다시 입력해 주세요.")
     } 
+
+    window.location.reload()
+}
+
+// 댓글 수정 ///////////////////// 수정 //////////////////////
+async function EditComment(id) {
+
+    const comment = document.getElementById('comment').value
+
+    const response = await fetch(`${BACKEND_API}/api/article/${article_id}/comment/${id}/`, {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("access"),
+            'content-type': 'application/json',
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+            'content': comment,
+        })
+    })
+    
+    if (response.status == 201) {
+        alert("댓글 수정 완료")         
+    } else if (response.status == 400) {
+        alert("다시 입력해 주세요.")
+    } 
+
+    window.location.reload()
+}
+
+// 댓글 삭제
+async function DeleteComment(id) {    
+
+    const response = await fetch(`${BACKEND_API}/api/article/${article_id}/comment/${id}/`, {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("access"),
+        },
+        method: 'DELETE',
+    })
 
     window.location.reload()
 }

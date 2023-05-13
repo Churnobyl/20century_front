@@ -60,14 +60,142 @@ async function handleShow() {
     const response_json = await response.json()
     console.log(response_json)
     const response_json3 = JSON.parse(JSON.stringify(response_json.article2));
-    const response_json2 = JSON.parse(JSON.stringify(response_json.article2));
-    sort_function(response_json2, 'bookmarked', 'desc')
+    const response_json2 = JSON.parse(JSON.stringify(response_json.article));
+    //sort_function(response_json2, 'bookmarked', 'desc')
 
-    console.log(response_json2)
+    const count = response_json.article.count
+    const all_page = parseInt(count/4) +1
+    const page_num = response_json.article.next.substr(-1) -1    
+    const pre_page = 1
+    const next_page = page_num +1
 
+    if (count < 5) {
+        const pagesection = document.getElementById('pagesection')
+        pagesection.remove();
+    } else {
+        pagination.innerHTML += `<li class="page-item">
+                                    <a id="page_item_pre" class="page-link" aria-label="Previous" onclick="PageShow(${pre_page})">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link">${page_num} / ${all_page}</a></li>
+                                <li class="page-item">
+                                    <a id="page_item_next" class="page-link" aria-label="Next" onclick="PageShow(${next_page})">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>`
+    }
+
+    articleView(response_json.article)
+
+    // let a = 0
+    // response_json2.forEach((e) => {
+    //     //console.log(e)
+    //     const backendUrl = 'http://127.0.0.1:8000'; // Replace with your backend URL
+    //     category_content.innerHTML += `<div class='col'>
+    //         <div class='card h-100'>
+    //             <img src='${backendUrl}${e.image}' class='card-img-top'>
+    //             <div class="progress-edge" id='progress${a}'>
+    //             </div>
+    //             <div class='card-body'>
+    //                 <h5 class='card-title'>제목: ${e.title}</h5>
+    //                 <p class='card-text'> 상품: ${e.product} </p>
+    //                 <h5 class='card-title' id='bid${a}'>현재가: ${e.bid}</h5>
+    //             </div>
+    //             <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${e.id})'>보러가기</button>
+    //             <div class='card-footer'>
+    //                 <small class='text-body-secondary'><span id='finish-time${a}'>${elapsedTime(e.finished_at)}</span></small>
+    //             </div>
+    //         </div>
+    //     </div>`
+
+
+    //     if (e.progress === true)
+    //     {
+    //         document.querySelector(`#progress${a}`).innerHTML = `<span class='badge rounded-pill text-bg-success'>진행중</span>`;
+    //     } else {
+    //         document.querySelector(`#progress${a}`).innerHTML = `<span class='badge rounded-pill text-bg-danger'>종료</span>`;
+    //     };
+
+    //     if (e.bid === undefined)
+    //     {
+    //         document.querySelector(`#bid${a}`).textContent = '입찰없음';
+    //     }
+
+    //     a++;
+    //     }
+    // )
+
+    response_json3.forEach((e) => {
+        const id = e.id;
+        const product = e.product;
+        const max_point = e.max_point;
+        const image_url = e.image;
+        const image = `${BACKEND_API}${image_url}`;
+
+        brand_list.innerHTML += 
+        `<div class="col">
+            <div class="card h-100">
+                <a href = "detail.html?id=${id}">
+                  <img src="${image}" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">${product}</h5>
+                    <p class='card-text'> ${max_point} </p>
+                </div>
+            </div>
+        </div>`
+    })
+}       
+
+async function PageShow(num) {
+
+    const response = await fetch(`${BACKEND_API}/api/article/?page=${num}`, {
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+
+    const count = response_json.article.count
+    const all_page = parseInt(count/4) +1
+    
+    let page_num = 0 
+    let pre_page = 0
+    let next_page = 0
+    if (response_json.article.previous == null) {
+        page_num = 1
+        pre_page = 1
+        next_page = 2
+    } else if (response_json.article.next == null) {
+        page_num =  all_page
+        pre_page = page_num -1
+        next_page = all_page
+    } else {     
+        page_num = response_json.article.next.substr(-1) -1    
+        pre_page = page_num -1
+        next_page = page_num +1
+    }
+
+    pagination.innerHTML = `<li class="page-item">
+                                <a id="page_item_pre" class="page-link" aria-label="Previous" onclick="PageShow(${pre_page})">
+                                <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link">${page_num} / ${all_page}</a></li>
+                            <li class="page-item">
+                                <a id="page_item_next" class="page-link" aria-label="Next" onclick="PageShow(${next_page})">
+                                <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>`    
+
+    category_content.innerHTML =''
+
+    articleView(response_json.article)
+}
+
+function articleView(response_json){
     let a = 0
-    response_json2.forEach((e) => {
-        console.log(e)
+    response_json.results.forEach((e) => {
         const backendUrl = 'http://127.0.0.1:8000'; // Replace with your backend URL
         category_content.innerHTML += `<div class='col'>
             <div class='card h-100'>
@@ -86,7 +214,6 @@ async function handleShow() {
             </div>
         </div>`
 
-
         if (e.progress === true)
         {
             document.querySelector(`#progress${a}`).innerHTML = `<span class='badge rounded-pill text-bg-success'>진행중</span>`;
@@ -100,9 +227,9 @@ async function handleShow() {
         }
 
         a++;
-        }                
-    ) 
-    }       
+        }
+    )
+}
     
     // for (let i = 0; i < RECOMMEND_PRODUCT; i++) {
     //     let image = response_json2[i]['image'];
@@ -164,9 +291,6 @@ async function handleShow() {
     //             </div>
     //         </div>
     //     </div>`
-
-
-
 
 function OpenDetailArticle(bid_id){
 

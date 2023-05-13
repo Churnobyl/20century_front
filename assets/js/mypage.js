@@ -54,8 +54,6 @@ async function MypageShow() {
 
     const response_json = await response.json()
 
-    console.log(response_json)
-
     const user_name = document.getElementById('name');    
     const user_point = document.getElementById('user_point');
     const user_created_at = document.getElementById('user_created_at');
@@ -72,10 +70,7 @@ async function MypageShow() {
 
     profile_img_area.setAttribute('src', `${BACKEND_API}/${new_profile_images}`);
 
-    console.log(response_json.book)
-    console.log(response_json.bid_json)
-
-
+    //마이페이지 찜 목록
     book_json.forEach((book, i) => {
         const title = book.title;
         const id = book.id;
@@ -85,8 +80,7 @@ async function MypageShow() {
         const image_url = book.image;
         const image = `${BACKEND_API}${image_url}`;
         const finished_at = new Date(book.finished_at);
-        console.log(title)
-    
+
         bookmark_board.innerHTML +=
         `
         <div class='bookmark_container'>
@@ -115,8 +109,6 @@ async function MypageShow() {
             document.querySelector(`#progress${i}`).innerHTML = `<span class='badge rounded-pill text-bg-danger'>종료</span>`;
         }
     });
-
-    console.log(response_json.bid_json)
 
     //마이페이지 입찰 현황
     bid_json.forEach((bid) => {
@@ -226,13 +218,17 @@ async function MyinfoShow() {
 // 내 정보 수정
 async function handleMyEdit() {
 
+    const username = document.getElementById('edit_user_name');
     const userimage = document.getElementById('edit_user_image');
     const image = userimage.files[0];
 
     const formData = new FormData();
 
-    formData.append('username', edit_user_name.value);
-    formData.append('profile_image', image);
+    if (image) {
+        formData.append('profile_image', image);
+    }
+
+    formData.append('username', username.value);
 
     const response = await fetch(`${BACKEND_API}/api/user/${user_id}/`, {
         headers: {
@@ -242,7 +238,9 @@ async function handleMyEdit() {
         body: formData
     })
 
-    console.log(await response.json())
+    if (response.status == 200) {
+        alert("수정이 완료되었습니다.") 
+    }
     window.location.reload()
 }
 
@@ -285,4 +283,8 @@ async function DeleteUser() {
     window.location.replace(`${FRONTEND_API}/index.html`)
 }
 
+function OpenDetailArticle(id){
 
+    window.location.href = `${FRONTEND_API}/detail.html?id=${id}`
+    
+}

@@ -33,16 +33,17 @@
                 </div>
                 <div>
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-success" type="button" onclick="PurchaseProduct()"><div id ="detail_btn_price">구매 | 300원</div></button>
+                        <!--<button class="btn btn-success" type="button" onclick="PurchaseProduct()"><div id ="detail_btn_price">구매 | 300원</div></button>-->
+                        <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><div id ="detail_btn_price">입찰 참가</div></button>
                         <button class="btn btn-danger" type="button" onclick="BookmarkArticle()"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
                                 <path
                                     d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
                                 <path
                                     d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                            </svg>관심상품</button>
+                            </svg> 관심 상품</button>
                         <button id ="detail_btn_edit" class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="MyProductShow()">상품 정보 수정</button>
-                        <button id ="detail_btn_del" class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="MyProductDelete()">상품 삭제</button>
+                        <button id ="detail_btn_del" class="btn btn-outline-success" type="button"onclick="MyProductDelete()">상품 삭제</button>
                     </div>
                     <!-- 입찰 종료시 
                     <button type="button" class="btn btn-secondary">종료됨</button>
@@ -73,7 +74,7 @@
                 <div id="timer">
                     00 : 00 : 00 초 남음
                 </div>
-                <hr>
+                <hr style="width: 60%; margin: 0px auto;">
                 <div class="desc_font" id="detail_product_desc">
                     여기가 desc
                 </div>
@@ -85,12 +86,60 @@
                 </div>
             </div>            
         </div>
-        <div class="comment_area"></div>
+        <hr style="width: 600px; margin: 0px auto;">
+        <div class="comment_area">
+            <div class="comment_list" id="comment_form">
+                <div class="card text-center">
+                    <div class="card-header">댓글 작성</div>
+                    <div class="card-body">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="comment" style="height: 100px"></textarea>
+                        </div>
+                        <!-- <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                    <div class="card-footer text-muted">
+                        <button class="btn btn-success" type="button" style="width: 60px" onclick="CreateComment()">작성</button>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 50px;">
+                    <ul class="list-group list-group-flush" id="comment_list">
+                        <!-- <li class="list-group-item">An item
+                            <button class="btn btn-success" type="button" style="width: 60px">수정</button>
+                            <button class="btn btn-success" type="button" style="width: 60px">삭제</button>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
     </main>
     <div class="comment_area"></div>
 
+    <!-- 입찰 Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">입찰 참가</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="main_font">입찰할 금액</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="my_point">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-danger" onclick="PurchaseProduct()">입찰</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- 개인정보 수정 Modal -->
+
+    <!-- 상품 정보 수정 Modal -->
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -99,9 +148,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="main_font">제목</p>
+                    <p class="main_font">상품 이름</p>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="product_title">
+                        <input type="text" class="form-control" id="product_name">
                     </div>
                     <p class="main_font">카테고리</p>
                     <select id="product_category" class="form-select" aria-label="Default select example">
