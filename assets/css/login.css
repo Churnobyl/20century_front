@@ -13,7 +13,7 @@ article {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    height: 850px
+    height: 950px
 }
 
 .container {
@@ -60,4 +60,9 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.kakao_login_btn {
+    border-radius: 12px;
+    margin-bottom: 20px;
 }
