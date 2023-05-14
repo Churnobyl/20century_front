@@ -30,11 +30,15 @@
                 <div class="cost">
                     <div class="info_font">현재 거래가</div>
                     <div class="money" id="detail_product_price"></div>
+                    <div class="info_font">최고 입찰자</div>
+                    <div class="max_user" id="max_money_user"></div>
                 </div>
                 <div>
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <!--<button class="btn btn-success" type="button" onclick="PurchaseProduct()"><div id ="detail_btn_price">구매 | 300원</div></button>-->
-                        <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><div id ="detail_btn_price">입찰 참가</div></button>
+                        <!-- 입찰 종료시  -->
+                        <button id ="end_btn" type="button" class="btn btn-secondary">종료됨</button>
+                        <button id ="start_btn" class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><div id ="detail_btn_price">입찰 참가</div></button>
                         <button class="btn btn-danger" type="button" onclick="BookmarkArticle()"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
                                 <path
@@ -45,9 +49,6 @@
                         <button id ="detail_btn_edit" class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" onclick="MyProductShow()">상품 정보 수정</button>
                         <button id ="detail_btn_del" class="btn btn-outline-success" type="button"onclick="MyProductDelete()">상품 삭제</button>
                     </div>
-                    <!-- 입찰 종료시 
-                    <button type="button" class="btn btn-secondary">종료됨</button>
-                    -->
                 </div>
                 <hr>
                 <div class="main_font" style="margin: 0px 0px 20px 50px;">상품 정보</div>
@@ -103,7 +104,7 @@
                         <button class="btn btn-success" type="button" style="width: 60px" onclick="CreateComment()">작성</button>
                     </div>
                 </div>
-                <div class="card" style="margin-top: 50px;">
+                <div class="card" style="margin-top: 50px;" style="visibility: visible;" id="comment_div">
                     <ul class="list-group list-group-flush" id="comment_list">
                         <!-- <li class="list-group-item">An item
                             <button class="btn btn-success" type="button" style="width: 60px">수정</button>

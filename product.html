@@ -37,10 +37,10 @@
             <p class="main_font">카테고리</p>
             <select id="product_category" class="form-select" aria-label="Default select example">
                 <option selected>-- 카테고리를 선택해 주세요 --</option>
-                <option value="A">일렉츄로닉</option>
-                <option value="B">패숑</option>
-                <option value="C">담금주</option>
-                <option value="D">잡화</option>
+                <option value="10001">일렉츄로닉</option>
+                <option value="10002">패숑</option>
+                <option value="10003">담금주</option>
+                <option value="10004">잡화</option>
             </select></br>
             <p class="main_font">이미지</p>
             <div class="input-group mb-3">
@@ -50,10 +50,13 @@
             <div class="input-group mb-3">
                 <textarea type="text" class="form-control" id="product_content" style="height: 150px"></textarea>
             </div>
-            <br>
             <p class="main_font">시작가</p>
             <div class="input-group mb-3" style="width: 200px;">
-                <input type="number" class="form-control" id="max_point" min="0"><span style="margin-left: 10px; font-size: 1.5rem;">point</span>
+                <input type="number" class="form-control" id="max_point" min="0" step="100"><span style="margin-left: 10px; font-size: 1.5rem;">point</span>
+            </div>
+            <p class="main_font">경매종료시간</p>
+            <div class="input-group mb-3" style="width: 300px;">
+                <input type="datetime-local" class="form-control" id="finished_at">
             </div>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button class="btn btn-success" type="button" onclick="CreateProduct()">등록</button>

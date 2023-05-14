@@ -1,72 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Signup • 20 Century</title>
-    <meta name="description" content="A minimalist layout for Login pages. Built with Pico CSS." />
+    <meta
+      name="description"
+      content="A minimalist layout for Login pages. Built with Pico CSS."
+    />
     <link rel="shortcut icon" href="https://picocss.com/favicon.ico" />
     <link rel="canonical" href="https://picocss.com/examples/sign-in/" />
     <!-- Pico.css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
     <link rel="stylesheet" href="assets/css/signup.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Nav -->
     <nav class="container-fluid">
-        <ul>
-        </ul>
-        <ul>
-            <li>
-            </li>
-            <li>
-            </li>
-        </ul>
+      <ul></ul>
+      <ul>
+        <li></li>
+        <li></li>
+      </ul>
     </nav>
     <!-- ./ Nav -->
 
     <!-- Main -->
     <main class="container">
-        <a href="index.html">
-            <img class="logo_img" src="assets/images/20.png" alt="logo img">
-        </a>
-        <article>
-            <div>
-                <img src="assets/images/kin.png" alt="kin_ad_img" style="height: 500px;">
+      <a href="index.html">
+        <img class="logo_img" src="assets/images/20.png" alt="logo img" />
+      </a>
+      <article>
+        <div>
+          <img
+            src="assets/images/kin.png"
+            alt="kin_ad_img"
+            style="height: 500px"
+          />
+        </div>
+        <div>
+          <hgroup>
+            <h1>Sign up</h1>
+            <h2>Welcome to 20 century museum</h2>
+          </hgroup>
+          <form>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="email"
+              aria-label="email"
+              autocomplete="email"
+              required
+            />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="password"
+              aria-label="password"
+              autocomplete="current-password"
+              required
+            />
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              placeholder="password2"
+              aria-label="password"
+              autocomplete="current-password"
+              required
+            />
+            <div class="input-group mb-3">
+              <input type="file" class="form-control" id="profile_image" />
             </div>
-            <div>
-                <hgroup>
-                    <h1>Sign up</h1>
-                    <h2>Welcome to 20 century museum</h2>
-                </hgroup>
-                <form>
-                    <input type="email" id="email" name="email" placeholder="email" aria-label="email"
-                        autocomplete="email" required />
-                    <input type="password" id="password" name="password" placeholder="password" aria-label="password"
-                        autocomplete="current-password" required />
-                    <input type="password" id="password2" name="password2" placeholder="password2" aria-label="password"
-                        autocomplete="current-password" required />
-                    <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="profile_image">
-                    </div>
-                    <button type='button' onclick="handleSignup()">회원가입</button>
-                    <a href="#"><img src="assets/images/kakao.jpg" class="kakao_login_btn" onclick="kakao_signup()"></a>
-                    <div class="signup">
-                        <a class="a_btn" href="login.html"> 로그인 </a>
-                        <a class="a_btn" href=""> 비밀번호 재설정 </a>
-                    </div>
-                </form>
+            <button type="button" onclick="handleSignup()">회원가입</button>
+            <a href="#"
+              ><img
+                src="assets/images/kakao.jpg"
+                class="kakao_login_btn"
+                onclick="kakao_signup()"
+            /></a>
+            <div class="signup">
+              <a class="a_btn" href="login.html"> 로그인 </a>
+              <a
+                class="a_btn"
+                href="http://127.0.0.1:8000/api/user/account/password_reset/"
+              >
+                비밀번호 재설정
+              </a>
             </div>
-
-        </article>
+          </form>
+        </div>
+      </article>
     </main>
     <!-- ./ Main -->
 
     <!-- Minimal theme switcher -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="assets/js/api.js"></script>
-</body>
-
+  </body>
 </html>
