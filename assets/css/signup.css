@@ -49,3 +49,8 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
+
+.kakao_login_btn {
+    border-radius: 12px;
+    margin-bottom: 20px;
+}

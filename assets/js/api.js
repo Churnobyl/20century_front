@@ -80,7 +80,7 @@ async function handleLogin() {
         alert("빈칸을 입력해 주세요.")
     } else if (response_json['detail'] == "No active account found with the given credentials") {
         alert("탈퇴한 사용자입니다.")
-    }else {
+    } else {
         alert('이메일과 비밀번호가 일치하지 않습니다.')
     }
 }
@@ -135,4 +135,33 @@ function checkLogout() {
     if (payload == null) {
         window.location.replace(`${FRONTEND_API}/`)
     }
+
+}
+
+
+// 카카오 회원가입
+async function kakao_signup() {
+    const payload = localStorage.getItem('payload');
+
+    if (payload == null) {
+        window.location.replace(`${BACKEND_API}/api/user/kakao/login`)
+    }
+
+    const response = await fetch(`${BACKEND_API}/api/user/kakao/login`, {})
+
+    console.log(response)
+
+}
+
+// 카카오 로그인
+function kakao_login() {
+    const payload = localStorage.getItem('payload');
+
+    console.log(payload)
+
+    //소셜 로그인 서비스의 API와 연동하여 로그인
+    if (payload == null) {
+        window.location.replace(`${BACKEND_API}/api/user/kakao/login`)
+    }
+
 }
