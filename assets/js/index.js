@@ -215,18 +215,16 @@ function articleView(response_json) {
                 <div class='card-body'>
                     <h5 class='card-title'>제목: ${e.title}</h5>
                     <p class='card-text'> 상품: ${e.product} </p>
-                    <h5 class='card-title' id='bid${a}'>현재가: <span style="color: red;">${
-      e.max_point
-    }</span>point</h5>
+                    <h5 class='card-title' id='bid${a}'>현재가: <span style="color: red;">${e.max_point
+      }</span>point</h5>
     <p class='card-text'> 최고입찰자: ${max_user} 님 </p>
                 </div>
-                <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${
-                  e.id
-                })'>보러가기</button>
+                <button type='button' class='btn btn-success' onclick='OpenDetailArticle(${e.id
+      })'>보러가기</button>
                 <div class='card-footer'>
                     <small class='text-body-secondary'><span id='finish-time${a}'>${elapsedTime(
-      e.finished_at
-    )}</span></small>
+        e.finished_at
+      )}</span></small>
                 </div>
             </div>
         </div>`;
@@ -313,9 +311,16 @@ function OpenDetailArticle(bid_id) {
   window.location.href = `${FRONTEND_API}/detail.html?id=${bid_id}`;
 }
 
-function searchProduct() {
-  const search_input = document
-    .querySelector("#search_input")
-    .value.toLowerCase();
-  // for (let i = 0; i < 100; i++) {}
+// title 검색 기능
+function searchTitle() {
+  const search_input = document.querySelector('#search_input').value;
+  let listInner = document.getElementsByClassName('product_list');
+  for (let i = 0; i < listInner.length; i++) {
+    title = listInner[i].getElementsByClassName('card-title')
+    if (title[0].innerHTML.indexOf(search_input) !== -1) {
+      listInner[i].style.display = 'flex'
+    } else (
+      listInner[i].style.display = 'none'
+    )
+  }
 }
