@@ -10,21 +10,19 @@ window.onload = () => {
 async function DetailCategory(category_name) {
   const response = await fetch(`${BACKEND_API}/api/article/${category_name}`, {
     method: "GET",
-  });
+  }); // 👍화이팅!
 
   const response_json = await response.json();
-  console.log(response_json);
   const category_cards = document.querySelector("#category_cards");
   const category_brand_list = document.querySelector("#category_brand_list");
 
   const response_json2 = JSON.parse(JSON.stringify(response_json.article));
   const response_json3 = JSON.parse(JSON.stringify(response_json.article));
-  console.log(response_json2);
 
   sort_function(response_json2, "bookmarked", "desc");
 
   // 카테고리 큰 카드 부분 4
-  for (let i = 1; i <= RECOMMEND_PRODUCT; i++) {
+  for (let i = 0; i <= RECOMMEND_PRODUCT; i++) {
     if (response_json2.length > i) {
       const title = response_json2[i].title;
       const id = response_json2[i].id;
@@ -68,7 +66,7 @@ async function DetailCategory(category_name) {
   }
 
   // 카테고리 작은 카드 부분 10
-  for (let i = 1; i <= RESENT_PRODUCT; i++) {
+  for (let i = 0; i <= RESENT_PRODUCT; i++) {
     if (response_json3.length > i) {
       const id = response_json3[i].id;
       const product = response_json3[i].product;

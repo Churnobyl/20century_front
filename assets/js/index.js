@@ -56,12 +56,10 @@ async function handleShow() {
   });
 
   const response_json = await response.json();
-  console.log(response_json);
   const response_json3 = JSON.parse(JSON.stringify(response_json.article2));
   const response_json2 = JSON.parse(JSON.stringify(response_json.article));
   const response_json_bid = JSON.parse(JSON.stringify(response_json.article2));
   //sort_function(response_json2, 'bookmarked', 'desc')
-  console.log(response_json_bid);
   const count = response_json.article.count;
   const all_page = parseInt(count / 4) + 1;
   let page_num = 1;
@@ -128,7 +126,6 @@ async function handleShow() {
   //     }
   // )
   response_json3.forEach((e, i) => {
-    console.log(e.max_point);
     const id = e.id;
     const product = e.product;
     const max_point = e.max_point;
@@ -162,7 +159,6 @@ async function PageShow(num) {
   });
 
   const response_json = await response.json();
-  console.log(response_json);
 
   const count = response_json.article.count;
   const all_page = parseInt(count / 4) + 1;
@@ -202,7 +198,6 @@ async function PageShow(num) {
 
 function articleView(response_json) {
   let a = 0;
-  console.log(response_json);
   response_json.results.forEach((e, i) => {
     let max_user = "";
     if (e.max_user != null) {
