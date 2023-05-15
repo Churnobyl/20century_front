@@ -1,51 +1,79 @@
 <div class="login_bar">
-    <a href="login.html" id='logins'>로그인</a>
-    <a href="signup.html" id='signups'>회원가입</a>
-    <a href="#" id="user_name"></a>
-    <button id='logout_btn' type="button" class="btn" style="color: gray;" onclick="handleLogout()">로그아웃</button>
+  <a href="login.html" id="logins">로그인</a>
+  <a href="signup.html" id="signups">회원가입</a>
+  <a href="#" id="user_name"></a>
+  <button
+    id="logout_btn"
+    type="button"
+    class="btn"
+    style="color: gray"
+    onclick="handleLogout()"
+  >
+    로그아웃
+  </button>
 </div>
 <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a href="index.html">
-            <img style="height: 50px;" src="assets/images/20.png" alt="logo img">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+  <div class="container-fluid">
+    <a href="index.html">
+      <img style="height: 50px" src="assets/images/20.png" alt="logo img" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" style="font-weight: bold">
+          <a class="nav-link" href="/">전체</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="category.html?category=10001">일렉츄로닉</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="category.html?category=10002">패숑</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="category.html?category=10003">담금주</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="category.html?category=10004">잡화</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html" style="font-weight: bold"
+            >HOME</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="product.html">상품등록</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mypage.html">마이페이지</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input
+          id="search_input"
+          class="form-control me-2"
+          type="search"
+          aria-label="Search"
+        />
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          onclick="searchProduct()"
+        >
+          Search
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item" style="font-weight: bold;">
-                    <a class="nav-link" href="/">전체</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href = "category.html?category=A">일렉츄로닉</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href = "category.html?category=B">패숑</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href = "category.html?category=C">담금주</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href = "category.html?category=D">잡화</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html" style="font-weight: bold;">HOME</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="product.html">상품등록</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mypage.html">마이페이지</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
+      </form>
     </div>
+  </div>
 </nav>
